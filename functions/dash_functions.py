@@ -31,3 +31,15 @@ def request_prediction(json_input):
             "Request failed with status {}, {}".format(response.status_code, response.text))
 
     return response.json()
+
+def is_correct(input):
+    # Vérifie si l'identifiant de client saisi par l'utilisateur est correct
+    
+    clients = pd.read_csv("data/clients.csv", sep=";")
+    
+    if input.isdigit() :
+        input_num = int(input)
+        if  (input_num >= 0) and (input_num < clients.shape[0]) :
+            return True
+            
+    return False

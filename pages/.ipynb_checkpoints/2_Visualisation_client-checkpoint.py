@@ -8,6 +8,7 @@ import shap
 sys.path.append('./functions')
 from dash_functions import load_customer_data
 from dash_functions import request_prediction
+from dash_functions import is_correct
 from dash_plots import my_waterfall
 from dash_plots import my_histo
 from dash_plots import my_scatter
@@ -16,7 +17,7 @@ from dash_plots import my_scatter
 
 def input_id():
     st.session_state.global_user_input = st.session_state.user_input
-    st.session_state.id = int(st.session_state.user_input) if st.session_state.user_input.isdigit() else None
+    st.session_state.id = int(st.session_state.user_input) if is_correct(st.session_state.user_input) else None
     st.session_state.print_msg = True 
 
     st.session_state.display_score = False
@@ -75,11 +76,10 @@ st.text_input(label="Identifiant client",
 )
 
 if st.session_state.print_msg :
-    if st.session_state.global_user_input.isdigit() : 
+    if is_correct(st.session_state.global_user_input) : 
         st.markdown(f"Identifiant du client sélectionné : :grey-background[{st.session_state.id}]")
     else :
-        st.error("Cet identifiant ne correspond à aucun client.")
-
+        st.error(f"Cet identifiant ne correspond à aucun client : veuillez saisir un nombre entre 0 et {clients.shape[0]-1}")
 
 st.divider()
 st.write("### Caractéristique du client")
