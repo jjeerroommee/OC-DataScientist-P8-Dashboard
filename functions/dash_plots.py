@@ -10,10 +10,8 @@ from shap.plots import colors
 from shap.plots._labels import labels
 
 
-# TODO: If we make a JS version of this plot then we could let users click on a bar and then see the dependence
-# plot that is associated with that feature get overlaid on the plot...it would quickly allow users to answer
-# why a feature is pushing down or up. Perhaps the best way to do this would be with an ICE plot hanging off
-# of the bar...
+# my_waterfall( ) is a modified version of waterfall_plot from shap library where labels are easier to understand
+
 def my_waterfall(shap_values, max_display=10, show=True) :
     """Plots an explanation of a single prediction as a waterfall plot.
 
